@@ -1,19 +1,1 @@
-#exterior {
-     height: auto;
-     width: auto;
-     justify-content: center;
-     position: relative;
-}
 
-#answerBox {
-    display: flex;
-    justify-content: center;
-    height: auto;
-    width: auto;
-}
-
-#question { 
-    text-align: center;
-    font-size: 2em;
-    font-weight: bold;
-}

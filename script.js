@@ -1,29 +1,51 @@
-const exterior = document.getElementById("exterior");
-let answer = document.getElementById("answerBox");
-let question = document.getElementById("question");
-let score = document.getElementById("score");
-let number = 0;
+function createQuiz(questions, quizContainer, resultsContainer, submitButton){
 
-function arrayChecker (array1, array2) {
-    if (array1.length !== array2.length) {
-        return false;
-    }
-    return true;
-}
-function questionLists() {
-    questions = ["When was this movie released?", "Who played the role?"];
-    answerSheet = ["midnight", "harry potter"];
-    console.log(arrayChecker(questions, answerSheet));
-    let answerLower = answer.toLowerCase;
-    
-    if (answer === "midnight") {
-        number++;
-        score.append(number);
-        console.log(answer);
-    }
-}
+    function showQuestions(questions, quizContainer){
+        const output = [];
+        let answers;
 
-let array1 = [1, 2];
-let array2 = [1, 2];
-questionLists();
-console.log(arrayChecker(array1, array2));
+        for (let i=0; i<questions.length; i++){
+            answers = [];
+            for (let letter in questions[i].answers){
+                answers.push(
+                    `<label>
+                        <input type="radio" name="question${i}" value="${letter}">
+                        ${letter} :
+                        ${questions[i].answers[letter]}
+                    </label>`
+                );
+            }
+    }
+
+    function showResults(questions, quizContainer, resultsContainer){
+        
+    }
+
+    showQuestions(questions, quizContainer);
+
+    submitButton.addEventListener('click', () => {
+        showResults(questions, quizContainer, resultsContainer);
+    });
+}}
+
+const questions = [
+    {
+        question: "Hvilken film er dette?",
+        answers: {
+            a: "Inception",
+            b: "Interstellar",
+            c: "Breaking Bad"
+        },
+        correctAnswer: "b"
+    },
+    {
+        question: "Hvem skrev Inception?",
+        answers: {
+            a: "Christopher Nolan",
+            b: "Steven Speilberg",
+            c: "Quentin Tarantino",
+            d: "Akira Kurosawa"
+        },
+        correctAnswer: "a"
+    }
+];
