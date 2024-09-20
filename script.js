@@ -1,51 +1,50 @@
-function createQuiz(questions, quizContainer, resultsContainer, submitButton){
+let questions = [];
+const ques = document.getElementById('ques');
 
-    function showQuestions(questions, quizContainer){
-        const output = [];
-        let answers;
-
-        for (let i=0; i<questions.length; i++){
-            answers = [];
-            for (let letter in questions[i].answers){
-                answers.push(
-                    `<label>
-                        <input type="radio" name="question${i}" value="${letter}">
-                        ${letter} :
-                        ${questions[i].answers[letter]}
-                    </label>`
-                );
-            }
+async function fetchQuestions() {
+    try {
+        const response = await
+        // bare henter 10 tilfeldige spørsmål om film fra en api
+          fetch('https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple');
+        const data = await response.json();
+        Questions = data.results;
     }
-
-    function showResults(questions, quizContainer, resultsContainer){
-        
+    catch (error) {
+        console.log(error);
+        ques.innerHTML = '<h5 style="color: red;"> error </h5>';
     }
+}
+fetchQuestions();
 
-    showQuestions(questions, quizContainer);
+let currentQuestion = 0;
+let score = 0;
 
-    submitButton.addEventListener('click', () => {
-        showResults(questions, quizContainer, resultsContainer);
+if (questions.length === 0) {
+    ques.innerHTML = '<h5> Loading Questions...</h5>';
+}
+
+function loadQuestion() {
+    const opt = document.getElementById('opt');
+    let currentQuestion = questions[currentQuestion].question;
+    if (currentQuestion.indexOf('&quot;') > -1) {
+        currentQuestion = currentQuestion.replace(/&quot;/g, '"');
+    }
+    if (currentQuestion.indexOf('\'') > -1) {
+        currentQuestion = currentQuestion.replace(/'/g, "'");
+    }
+    ques.innerText = currentQuestion;
+    opt.innerHTML = "";
+    const correctAnswer = questions[currentQuestion].correct_answer;
+    console.log(questions); // Take this out of the actual code later
+    const incorrectAnswers = questions[currentQuestion].incorrect_answers;
+    const answers = [correctAnswer, ...incorrectAnswers];
+    answers.sort(() => Math.random() - 0.5);
+
+    const options = [correctAnswer, ...incorrectAnswers];
+    options.sort(() => Math.random() - 0.5);    
+    options.forEach(option => {
+        // TODO
+        // add so that options are added
+        // with the radio element
     });
-}}
-
-const questions = [
-    {
-        question: "Hvilken film er dette?",
-        answers: {
-            a: "Inception",
-            b: "Interstellar",
-            c: "Breaking Bad"
-        },
-        correctAnswer: "b"
-    },
-    {
-        question: "Hvem skrev Inception?",
-        answers: {
-            a: "Christopher Nolan",
-            b: "Steven Speilberg",
-            c: "Quentin Tarantino",
-            d: "Akira Kurosawa"
-        },
-        correctAnswer: "a"
-    }
-];
+}
