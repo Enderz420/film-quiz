@@ -46,5 +46,43 @@ function loadQuestion() {
         // TODO
         // add so that options are added
         // with the radio element
+        if (option.indexOf('&quot;') > -1) {
+            option = option.replace(/&quot;/g, '"');
+        }           
+        if (option.indexOf('\'') > -1) {
+            option = option.replace(/'/g, "'");
+        }
+        const choiceDiv = document.createElement('div');
+        const choice = document.createElement('input');
+        const labelChoice = document.createElement('label');
+        choice.type = 'radio';
+        choice.name = 'answer';
+        choice.value = option;
+        labelChoice.textContent = option;
+        choiceDiv.appendChild(choice);
+        choiceDiv.appendChild(labelChoice);
+        opt.appendChild(choiceDiv);
     });
 }
+
+setTimeout(() => {
+    loadQuestion();
+    if (Question.length === 0) {
+        ques.innerHTML = '<h5> No Questions </h5>';
+    }
+}, 2000);
+
+function checkAns() {
+    const selectedAnswer = document.querySelector('input[name="answer"]:checked').value;
+
+    if (selectedAnswer === questions[currentQuestion].correct_answer) {
+        score++;
+        nextQuestion();
+    } else {
+        nextQuestion();
+    }
+}
+
+// TODO
+// Create nextQuestion function to increment the next question variable and load the next question
+function nextQuestion() {}
