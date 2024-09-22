@@ -3,19 +3,19 @@ const ques = document.getElementById('ques');
 
 async function fetchQuestions() {
     try {
-        const response = await
-        // bare henter 10 tilfeldige spørsmål om film fra en api
-          fetch('https://opentdb.com/api.php?amount=10&category=11&difficulty=easy&type=multiple');
+        const response =
+          await // bare henter 10 tilfeldige spørsmål om film fra en api
+          fetch(
+            "https://opentdb.com/api.php?amount=10&category=11&type=multiple"
+          );
         const data = await response.json();
-        Questions = data.results;
+        questions = data.results;
     }
     catch (error) {
         console.log(error);
         ques.innerHTML = '<h5 style="color: red;"> error </h5>';
     }
-}
-fetchQuestions();
-
+}console.log(fetchQuestions());
 let currentQuestion = 0;
 let score = 0;
 
@@ -25,14 +25,22 @@ if (questions.length === 0) {
 
 function loadQuestion() {
     const opt = document.getElementById('opt');
-    let currentQuestion = questions[currentQuestion].question;
-    if (currentQuestion.indexOf('&quot;') > -1) {
-        currentQuestion = currentQuestion.replace(/&quot;/g, '"');
+    if (opt === null) {
+        console.log("it fucking died");
+        return;
     }
-    if (currentQuestion.indexOf('\'') > -1) {
-        currentQuestion = currentQuestion.replace(/'/g, "'");
+    let currentQuestions = questions[currentQuestion].question;
+    if (currentQuestions === undefined) {
+        console.log("currentQuestions is undefined");
+        return;
     }
-    ques.innerText = currentQuestion;
+    if (currentQuestions.indexOf('&quot;') > -1) {
+        currentQuestions = currentQuestions.replace(/&quot;/g, '"');
+    }
+    if (currentQuestions.indexOf('\'') > -1) {
+        currentQuestions = currentQuestions.replace(/'/g, "'");
+    }
+    ques.innerText = currentQuestions;
     opt.innerHTML = "";
     const correctAnswer = questions[currentQuestion].correct_answer;
     console.log(questions); // Take this out of the actual code later
@@ -43,9 +51,10 @@ function loadQuestion() {
     const options = [correctAnswer, ...incorrectAnswers];
     options.sort(() => Math.random() - 0.5);    
     options.forEach(option => {
-        // TODO
-        // add so that options are added
-        // with the radio element
+        if (option === null || option === undefined) {
+            console.log("option is either undefined or null");
+            return;
+        }
         if (option.indexOf('&quot;') > -1) {
             option = option.replace(/&quot;/g, '"');
         }           
@@ -61,6 +70,10 @@ function loadQuestion() {
         labelChoice.textContent = option;
         choiceDiv.appendChild(choice);
         choiceDiv.appendChild(labelChoice);
+        if (opt === null) {
+            console.log("opt is null");
+            return;
+        }
         opt.appendChild(choiceDiv);
     });
 }
@@ -85,4 +98,16 @@ function checkAns() {
 
 // TODO
 // Create nextQuestion function to increment the next question variable and load the next question
-function nextQuestion() {}
+function nextQuestion() {
+    if (currentQuestion < questions.length) {
+        currentQuestion++;
+        loadQuestion();
+    } else {
+        document.getElementById('opt').remove();
+        document.getElementById('ques').remove();
+        document.getElementById('btn').remove();
+        loadScore();
+    }
+}
+
+loadQuestion();
