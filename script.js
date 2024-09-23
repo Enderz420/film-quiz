@@ -1,5 +1,8 @@
+// declare variables and arrays
 let questions = [];
 const ques = document.getElementById('ques');
+let currentQuestion = 0;
+let score = 0;
 
 async function fetchQuestions() {
     try {
@@ -15,9 +18,8 @@ async function fetchQuestions() {
         console.log(error);
         ques.innerHTML = '<h5 style="color: red;"> error </h5>';
     }
-}console.log(fetchQuestions());
-let currentQuestion = 0;
-let score = 0;
+}
+console.log(fetchQuestions());
 
 if (questions.length === 0) {
     ques.innerHTML = '<h5> Loading Questions...</h5>';
@@ -26,7 +28,7 @@ if (questions.length === 0) {
 function loadQuestion() {
     const opt = document.getElementById('opt');
     if (opt === null) {
-        console.log("it fucking died");
+        console.log("opt id is null");
         return;
     }
     let currentQuestions = questions[currentQuestion].question;
@@ -34,16 +36,15 @@ function loadQuestion() {
         console.log("currentQuestions is undefined");
         return;
     }
-    if (currentQuestions.indexOf('&quot;') > -1) {
+    if (currentQuestions.indexOf('&quot;')) {
         currentQuestions = currentQuestions.replace(/&quot;/g, '"');
     }
-    if (currentQuestions.indexOf('\'') > -1) {
-        currentQuestions = currentQuestions.replace(/'/g, "'");
+    if (currentQuestions.indexOf("&#039;") > -1) {
+      currentQuestions = currentQuestions.replace(/&#039;/g, "'");
     }
     ques.innerText = currentQuestions;
     opt.innerHTML = "";
     const correctAnswer = questions[currentQuestion].correct_answer;
-    console.log(questions); // Take this out of the actual code later
     const incorrectAnswers = questions[currentQuestion].incorrect_answers;
     const answers = [correctAnswer, ...incorrectAnswers];
     answers.sort(() => Math.random() - 0.5);
@@ -58,7 +59,7 @@ function loadQuestion() {
         if (option.indexOf('&quot;') > -1) {
             option = option.replace(/&quot;/g, '"');
         }           
-        if (option.indexOf('\'') > -1) {
+        if (option.indexOf("'") > 1) {
             option = option.replace(/'/g, "'");
         }
         const choiceDiv = document.createElement('div');
@@ -80,7 +81,7 @@ function loadQuestion() {
 
 setTimeout(() => {
     loadQuestion();
-    if (Question.length === 0) {
+    if (questions.length === 0) {
         ques.innerHTML = '<h5> No Questions </h5>';
     }
 }, 2000);
@@ -90,17 +91,18 @@ function checkAns() {
 
     if (selectedAnswer === questions[currentQuestion].correct_answer) {
         score++;
+        console.log(score);
         nextQuestion();
     } else {
         nextQuestion();
+        console.log(score);
     }
 }
 
-// TODO
-// Create nextQuestion function to increment the next question variable and load the next question
 function nextQuestion() {
-    if (currentQuestion < questions.length) {
+    if (currentQuestion < questions.length - 1) {
         currentQuestion++;
+        console.log(score);
         loadQuestion();
     } else {
         document.getElementById('opt').remove();
@@ -110,4 +112,12 @@ function nextQuestion() {
     }
 }
 
-loadQuestion();
+
+function loadScore() {
+    const totalScore = document.getElementById('score');
+    totalScore.innerHTML = `<h3>Du fikk ${score} av ${questions.length} riktig!</h3>`;
+}
+
+
+// TODO
+// Create the option to restart natively with the click of a button
