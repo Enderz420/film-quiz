@@ -3,20 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page Title</title>
+    <title>Film Quiz</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="exterior">
-        <div>
-            <h1 id="question">example 1:</h1>
-            <p id="score">score</p>
-        </div>
-        <div id="answerBox">
-                <input type="text" id="answer"></input>
-                <button id="submit">Click this button</button>
-        </div>
+    <div class="panel">
+        <h1 id="title">Film Quiz</h1>
+        <div class="question" id="ques"></div>
+        <div class="options" id="opt"></div>
+        <button onclick="checkAns()" class="btn" id="btn">SUBMIT</button>
+        <div id="score"></div>
+        <script src="script.js"></script>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
