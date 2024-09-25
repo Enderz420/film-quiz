@@ -77,6 +77,9 @@ function loadQuestion() {
         if (option.indexOf("&eacute;") > -1) {
             option = option.replace(/&eacute;/g, "é");
         }
+        if (option.indexOf("&amp;") > -1) {
+            option = option.replace(/&amp;/g, "&");
+        }
         const choiceDiv = document.createElement("div");
         const choice = document.createElement("input");
         const labelChoice = document.createElement("label");
@@ -132,7 +135,3 @@ function loadScore() {
     const totalScore = document.getElementById('score');
     totalScore.innerHTML = `Du fikk ${score} av ${questions.length} riktig!`;
 }
-
-
-// TODO
-// Create the option to restart natively with the click of a button
