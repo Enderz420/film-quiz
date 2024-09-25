@@ -8,6 +8,7 @@
 
 body {
     background-color: #FF7F50;
+    user-select: none;
 }
 
 @media (hover: hover) {
@@ -22,7 +23,7 @@ input[type="radio"] {
   width: 20px;
   height: 20px;
   margin: 6px;
-  padding: 0;
+  padding: 0px;
   border: 2px solid var(--radio-border-color);
   border-radius: 50%;
   appearance: none;
@@ -35,7 +36,7 @@ input[type="radio"]:not(:disabled):checked {
   border-color: var(--radio-checked-color);
   background-color: var(--radio-checked-color);
   background-clip: content-box;
-  padding: 2px;
+  padding: 0px;
   background-image: radial-gradient(
     circle,
     var(--radio-checked-color) 0%,
@@ -53,7 +54,7 @@ input[type="radio"]:focus-visible {
 .question {
     font-size: 20px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     text-align: center;
 }
 
@@ -63,12 +64,14 @@ input[type="radio"]:focus-visible {
     align-items: center;
     margin: auto;
     font-size: 20px;
+    padding: 2%;
 }
 
 .btn {
     display: flex;
     align-items: center;
     margin: auto;
+    margin-top: 2%;
     background-color: var(--primary-color);
     color: var(--primary-button-text-color);
     text-decoration: none;
@@ -95,4 +98,9 @@ input[type="radio"]:focus-visible {
 
 #title {
     text-align: center;
+}
+
+#restartBtn {
+    margin-top: 3%;
+    background-color: red;
 }
