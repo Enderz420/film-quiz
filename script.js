@@ -39,8 +39,11 @@ function loadQuestion() {
     if (currentQuestions.indexOf('&quot;')) {
         currentQuestions = currentQuestions.replace(/&quot;/g, '"');
     }
-    if (currentQuestions.indexOf("&#039;") > -1) {
-      currentQuestions = currentQuestions.replace(/&#039;/g, "'");
+    if (currentQuestions.indexOf("&#039;")) {
+        currentQuestions = currentQuestions.replace(/&#039;/g, "'");
+    }
+    if (currentQuestions.indexOf("&amp;")) {
+        currentQuestions = currentQuestions.replace(/&amp;/g, "&");
     }
     ques.innerText = currentQuestions;
     opt.innerHTML = "";
@@ -59,8 +62,17 @@ function loadQuestion() {
         if (option.indexOf('&quot;') > -1) {
             option = option.replace(/&quot;/g, '"');
         }           
-        if (option.indexOf("'") > 1) {
-            option = option.replace(/'/g, "'");
+        if (option.indexOf("&#039;") > -1) {
+            option = option.replace(/&#039;/g, "'");
+        }
+        if (option.indexOf("&aacute;") > -1) {
+            option = option.replace(/&aacute;/g, "á");
+        }
+        if (option.indexOf("&ntilde;") > -1) {
+            option = option.replace(/&ntilde;/g, "ñ");
+        }
+        if (option.indexOf("&egrave;") > -1) {
+            option = option.replace(/&egrave;/g, "è");
         }
         const choiceDiv = document.createElement('div');
         const choice = document.createElement('input');
