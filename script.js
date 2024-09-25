@@ -1,6 +1,6 @@
 // declare variables and arrays
 let questions = [];
-const ques = document.getElementById('ques');
+const ques = document.getElementById("ques");
 let currentQuestion = 0;
 let score = 0;
 
@@ -16,13 +16,13 @@ async function fetchQuestions() {
     }
     catch (error) {
         console.log(error);
-        ques.innerHTML = '<h5 style="color: red;"> error </h5>';
+        ques.innerHTML = "error";
     }
 }
 console.log(fetchQuestions());
 
 if (questions.length === 0) {
-    ques.innerHTML = '<h5> Loading Questions...</h5>';
+    ques.innerHTML = "Loading questions";
 }
 
 function loadQuestion() {
@@ -74,11 +74,14 @@ function loadQuestion() {
         if (option.indexOf("&egrave;") > -1) {
             option = option.replace(/&egrave;/g, "è");
         }
-        const choiceDiv = document.createElement('div');
-        const choice = document.createElement('input');
-        const labelChoice = document.createElement('label');
-        choice.type = 'radio';
-        choice.name = 'answer';
+        if (option.indexOf("&eacute;") > -1) {
+            option = option.replace(/&eacute;/g, "é");
+        }
+        const choiceDiv = document.createElement("div");
+        const choice = document.createElement("input");
+        const labelChoice = document.createElement("label");
+        choice.type = "radio";
+        choice.name = "answer";
         choice.value = option;
         labelChoice.textContent = option;
         choiceDiv.appendChild(choice);
@@ -94,7 +97,7 @@ function loadQuestion() {
 setTimeout(() => {
     loadQuestion();
     if (questions.length === 0) {
-        ques.innerHTML = '<h5> No Questions </h5>';
+        ques.innerHTML = "No questions";
     }
 }, 2000);
 
@@ -117,9 +120,9 @@ function nextQuestion() {
         console.log(score);
         loadQuestion();
     } else {
-        document.getElementById('opt').remove();
-        document.getElementById('ques').remove();
-        document.getElementById('btn').remove();
+        document.getElementById("opt").remove();
+        document.getElementById("ques").remove();
+        document.getElementById("btn").remove();
         loadScore();
     }
 }
@@ -127,7 +130,7 @@ function nextQuestion() {
 
 function loadScore() {
     const totalScore = document.getElementById('score');
-    totalScore.innerHTML = `<h3>Du fikk ${score} av ${questions.length} riktig!</h3>`;
+    totalScore.innerHTML = `Du fikk ${score} av ${questions.length} riktig!`;
 }
 
 
