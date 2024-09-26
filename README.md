@@ -1,10 +1,10 @@
+# Prosjektet er live på [Github Pages!](https://enderz420.github.io/projects/film-quiz/)
+
 # Film Quiz
 Dette er en Film quiz som henter film data fra [OpenTDB](https://opentdb.com).
 Totalt er det 10 spørsmål som hentes in. 
 API-et henter nye spørsmål da du laster in nettsiden på nytt.
 Poengene dine blir vist på slutten av spillet.
-
-## Prosjektet er live på [Github Pages!](https://enderz420.github.io/projects/film-quiz/)
 
 ## Last ned repository
 Du kan direkte klone repoet:<br>
