@@ -45,6 +45,12 @@ function loadQuestion() {
     if (currentQuestions.indexOf("&amp;")) {
         currentQuestions = currentQuestions.replace(/&amp;/g, "&");
     }
+    if (option.indexOf("&ldquo") > -1) {
+        option = option.replace(/&ldquo;/g, "“");
+    }
+    if (option.indexOf("&rdquo") > -1) {
+      option = option.replace(/&rdquo;/g, "”");
+    }
     ques.innerText = currentQuestions;
     opt.innerHTML = "";
     const correctAnswer = questions[currentQuestion].correct_answer;
