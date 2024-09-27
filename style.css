@@ -1,20 +1,26 @@
+/* colors are from flatuicolors.com/palette/defo */
+
 :root {
     --radio-border-color: black;
-    --radio-checked-color: #16a085;
+    --radio-checked-color: black;
     --radio-hover-color: rgb(0, 255, 255);
     --primary-color: #2ECC71;
     --primary-button-text-color: white;
 }
 
 body {
-    background-color: #FF7F50;
     user-select: none;
+    margin: 0;
+    background-image: linear-gradient(#e74c3c, #f39c12);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 @media (hover: hover) {
     input[type="radio"]:not(:disabled):hover {
         background-color: var(--radio-hover-color);
         outline: 6px solid var(--radio-hover-color);
+        cursor: pointer;
     }
 }
 
@@ -29,7 +35,7 @@ input[type="radio"] {
   appearance: none;
   background-color: transparent;
   outline: none;
-+ transition: 0.1s;
+  transition: 0.1s;
 }
 
 input[type="radio"]:not(:disabled):checked {
@@ -56,12 +62,14 @@ input[type="radio"]:focus-visible {
     font-weight: bold;
     margin-bottom: 5px;
     text-align: center;
+    text-decoration: underline;
 }
 
 .options {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin: auto;
     font-size: 20px;
     padding: 2%;
@@ -71,7 +79,6 @@ input[type="radio"]:focus-visible {
     display: flex;
     align-items: center;
     margin: auto;
-    margin-top: 2%;
     background-color: var(--primary-color);
     color: var(--primary-button-text-color);
     text-decoration: none;
@@ -84,6 +91,7 @@ input[type="radio"]:focus-visible {
 .btn:hover {
  transform: translateY(-3px);
  box-shadow: 0 10px 4px rgba(0, 0, 0, 0.2);
+ cursor: pointer;
 }
 
 .btn:active {
@@ -98,6 +106,7 @@ input[type="radio"]:focus-visible {
 
 #title {
     text-align: center;
+    font-size: 40px;
 }
 
 #restartBtn {
