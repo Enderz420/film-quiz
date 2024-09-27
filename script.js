@@ -51,6 +51,9 @@ function loadQuestion() {
     if (currentQuestions.indexOf("&rdquo") > -1) {
       currentQuestions = currentQuestions.replace(/&rdquo;/g, "”");
     }
+    if (currentQuestions.indexOf("&rsquo;") > -1) {
+      currentQuestions = currentQuestions.replace(/&rsquo;/g, "’");
+    }
     ques.innerText = currentQuestions;
     opt.innerHTML = "";
     const correctAnswer = questions[currentQuestion].correct_answer;
