@@ -45,6 +45,12 @@ function loadQuestion() {
     if (currentQuestions.indexOf("&amp;")) {
         currentQuestions = currentQuestions.replace(/&amp;/g, "&");
     }
+    if (option.indexOf("&ldquo") > -1) {
+        option = option.replace(/&ldquo;/g, "“");
+    }
+    if (option.indexOf("&rdquo") > -1) {
+      option = option.replace(/&rdquo;/g, "”");
+    }
     ques.innerText = currentQuestions;
     opt.innerHTML = "";
     const correctAnswer = questions[currentQuestion].correct_answer;
@@ -73,12 +79,6 @@ function loadQuestion() {
         }
         if (option.indexOf("&egrave;") > -1) {
             option = option.replace(/&egrave;/g, "è");
-        }
-        if (option.indexOf("&ldquo") > -1) {
-            option = option.replace(/&ldquo;/g, "“");
-        }
-        if (option.indexOf("&rdquo") > -1) {
-            option = option.replace(/&rdquo;/g, "”");
         }
         const choiceDiv = document.createElement('div');
         const choice = document.createElement('input');
