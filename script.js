@@ -74,6 +74,12 @@ function loadQuestion() {
         if (option.indexOf("&egrave;") > -1) {
             option = option.replace(/&egrave;/g, "è");
         }
+        if (option.indexOf("&ldquo") > -1) {
+            option = option.replace(/&ldquo;/g, "“");
+        }
+        if (option.indexOf("&rdquo") > -1) {
+            option = option.replace(/&rdquo;/g, "”");
+        }
         const choiceDiv = document.createElement('div');
         const choice = document.createElement('input');
         const labelChoice = document.createElement('label');
