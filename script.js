@@ -45,11 +45,11 @@ function loadQuestion() {
     if (currentQuestions.indexOf("&amp;")) {
         currentQuestions = currentQuestions.replace(/&amp;/g, "&");
     }
-    if (option.indexOf("&ldquo") > -1) {
-        option = option.replace(/&ldquo;/g, "“");
+    if (currentQuestions.indexOf("&ldquo") > -1) {
+        currentQuestions = currentQuestions.replace(/&ldquo;/g, "“");
     }
-    if (option.indexOf("&rdquo") > -1) {
-      option = option.replace(/&rdquo;/g, "”");
+    if (currentQuestions.indexOf("&rdquo") > -1) {
+      currentQuestions = currentQuestions.replace(/&rdquo;/g, "”");
     }
     ques.innerText = currentQuestions;
     opt.innerHTML = "";
